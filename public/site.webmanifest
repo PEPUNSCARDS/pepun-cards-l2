@@ -1,0 +1,21 @@
+{
+  "name": "PEPUNS",
+  "short_name": "PEPUNS",
+  "icons": [
+    {
+      "src": "/lovable-uploads/e3178880-45a5-4a21-b02a-7d641b243495.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/lovable-uploads/e3178880-45a5-4a21-b02a-7d641b243495.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
