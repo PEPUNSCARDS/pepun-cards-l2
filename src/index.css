@@ -8,42 +8,42 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 275 60% 20%;
+    --background: 280 50% 85%;
     --foreground: 0 0% 100%;
 
-    --card: 275 50% 25%;
+    --card: 280 40% 90%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 275 50% 25%;
+    --popover: 280 40% 90%;
     --popover-foreground: 0 0% 100%;
 
     --primary: 0 0% 100%;
-    --primary-foreground: 275 60% 20%;
+    --primary-foreground: 280 50% 85%;
 
-    --secondary: 275 40% 30%;
+    --secondary: 280 30% 80%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 275 30% 35%;
-    --muted-foreground: 0 0% 80%;
+    --muted: 280 20% 75%;
+    --muted-foreground: 0 0% 95%;
 
-    --accent: 180 100% 50%;
-    --accent-foreground: 275 60% 20%;
+    --accent: 0 0% 100%;
+    --accent-foreground: 280 50% 85%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 275 30% 40%;
-    --input: 275 30% 30%;
-    --ring: 180 100% 50%;
+    --border: 280 30% 80%;
+    --input: 280 30% 75%;
+    --ring: 0 0% 100%;
 
     --radius: 0.75rem;
 
     /* PEPUNS Brand Colors */
-    --pepuns-primary: 275 60% 20%;
-    --pepuns-secondary: 180 100% 50%;
-    --pepuns-gradient: linear-gradient(135deg, hsl(275 60% 20%), hsl(260 70% 35%));
-    --pepuns-glow: 0 0 30px hsl(180 100% 50% / 0.3);
-    --pepuns-shadow: 0 10px 40px -10px hsl(275 60% 20% / 0.4);
+    --pepuns-primary: 280 50% 85%;
+    --pepuns-secondary: 0 0% 100%;
+    --pepuns-gradient: linear-gradient(135deg, hsl(280 50% 85%), hsl(280 40% 90%));
+    --pepuns-glow: 0 0 30px hsl(0 0% 100% / 0.3);
+    --pepuns-shadow: 0 10px 40px -10px hsl(280 50% 85% / 0.4);
 
     /* Animation variables */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

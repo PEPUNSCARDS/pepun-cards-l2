@@ -15,8 +15,7 @@ const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    country: "",
-    walletAddress: ""
+    country: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -38,8 +37,7 @@ const Register = () => {
     setFormData({
       name: "",
       email: "",
-      country: "",
-      walletAddress: ""
+      country: ""
     });
   };
 
@@ -60,22 +58,14 @@ const Register = () => {
             <div className="text-center mb-8">
               <Link 
                 to="/" 
-                className="inline-flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors mb-6"
+                className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back to Home
               </Link>
               
-              <div className="mb-6">
-                <img 
-                  src="/lovable-uploads/e3178880-45a5-4a21-b02a-7d641b243495.png" 
-                  alt="PEPUNS Crystal" 
-                  className="w-16 h-16 mx-auto animate-pulse-glow"
-                />
-              </div>
-              
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Join <span className="text-accent">PEPUNS</span>
+                Join <span className="text-foreground">PEPUNS</span>
               </h1>
               <p className="text-xl text-muted-foreground">
                 Register for your PEPUNS debit card and start spending PEPU
@@ -85,7 +75,7 @@ const Register = () => {
             <Card className="bg-card/50 backdrop-blur-sm border-border/30">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-2xl">
-                  <UserPlus className="w-6 h-6 text-accent" />
+                  <UserPlus className="w-6 h-6 text-foreground" />
                   Registration Form
                 </CardTitle>
               </CardHeader>
@@ -145,25 +135,9 @@ const Register = () => {
                     </Select>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="wallet" className="text-foreground">PEPU Wallet Address</Label>
-                    <Input
-                      id="wallet"
-                      type="text"
-                      value={formData.walletAddress}
-                      onChange={(e) => handleInputChange("walletAddress", e.target.value)}
-                      placeholder="0x..."
-                      required
-                      className="bg-input/50 border-border/50 text-foreground font-mono"
-                    />
-                    <p className="text-muted-foreground text-sm">
-                      Enter your Pepe Unchained wallet address for PEPU top-ups
-                    </p>
-                  </div>
-
-                  <div className="bg-accent/10 border border-accent/30 rounded-lg p-4">
+                  <div className="bg-foreground/10 border border-foreground/30 rounded-lg p-4">
                     <div className="flex items-start gap-3">
-                      <Clock className="w-5 h-5 text-accent mt-0.5" />
+                      <Clock className="w-5 h-5 text-foreground mt-0.5" />
                       <div>
                         <h4 className="font-semibold text-foreground mb-1">Processing Time</h4>
                         <p className="text-muted-foreground text-sm">

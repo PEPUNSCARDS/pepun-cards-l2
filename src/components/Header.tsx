@@ -8,11 +8,6 @@ const Header = () => {
     <header className="border-b border-border/20 backdrop-blur-sm bg-background/80 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
-          <img 
-            src="/lovable-uploads/e3178880-45a5-4a21-b02a-7d641b243495.png" 
-            alt="PEPUNS" 
-            className="w-8 h-8 animate-pulse-glow"
-          />
           <span className="text-2xl font-bold text-foreground">PEPUNS</span>
         </Link>
         
