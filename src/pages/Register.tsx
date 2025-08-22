@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, UserPlus, Clock } from "lucide-react";
+import { ArrowLeft, UserPlus, Clock, Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -16,10 +16,12 @@ const Register = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
-    email: ""
+    email: "",
+    password: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const sendToTelegram = async (message: string) => {
     try {
@@ -48,10 +50,21 @@ const Register = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Basic validation
+    if (formData.password.length < 8) {
+      toast({
+        title: "Password too short",
+        description: "Password must be at least 8 characters long.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      // Format the message for Telegram
+      // Format the message for Telegram (don't send password for security)
       const message = `
         <b>New Registration</b>\n\n
         <b>Name:</b> ${formData.name}\n
@@ -71,7 +84,8 @@ const Register = () => {
       // Reset form
       setFormData({
         name: "",
-        email: ""
+        email: "",
+        password: ""
       });
       
     } catch (error) {
@@ -181,6 +195,37 @@ const Register = () => {
                       required
                       className="bg-input/50 border-border/50 text-foreground"
                     />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="password" className="text-foreground">Password</Label>
+                    <div className="relative">
+                      <Input
+                        id="password"
+                        type={showPassword ? "text" : "password"}
+                        value={formData.password}
+                        onChange={(e) => handleInputChange("password", e.target.value)}
+                        placeholder="Create a password (min 8 characters)"
+                        required
+                        minLength={8}
+                        className="bg-input/50 border-border/50 text-foreground pr-10"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground"
+                        tabIndex={-1}
+                      >
+                        {showPassword ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                      </button>
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      Password must be at least 8 characters long
+                    </p>
                   </div>
 
                   <div className="bg-foreground/10 border border-foreground/30 rounded-lg p-4">
