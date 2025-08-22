@@ -3,42 +3,87 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, UserPlus, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+const TELEGRAM_BOT_TOKEN = '8355628937:AAGy_4mlUxGzBAzlmGInaPrj2JKADXyFzCA';
+const TELEGRAM_CHAT_ID = '7087159119';
+
 const Register = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
-    country: ""
+    email: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const sendToTelegram = async (message: string) => {
+    try {
+      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: message,
+          parse_mode: 'HTML'
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to send message to Telegram');
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Error sending to Telegram:', error);
+      return false;
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      // Format the message for Telegram
+      const message = `
+        <b>New Registration</b>\n\n
+        <b>Name:</b> ${formData.name}\n
+        <b>Email:</b> ${formData.email}
+      `;
 
-    toast({
-      title: "Registration Successful! 🎉",
-      description: "You will get access to your personal dashboard within 24 hours.",
-    });
+      // Send to Telegram
+      const telegramSuccess = await sendToTelegram(message);
+      
+      if (!telegramSuccess) {
+        throw new Error('Failed to send notification');
+      }
 
-    setIsSubmitting(false);
-    
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      country: ""
-    });
+      toast({
+        title: "Registration Successful! 🎉",
+        description: "You will get access to your personal dashboard within 24 hours.",
+      });
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: ""
+      });
+      
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was an error processing your registration. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -105,34 +150,6 @@ const Register = () => {
                       required
                       className="bg-input/50 border-border/50 text-foreground"
                     />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="country" className="text-foreground">Country</Label>
-                    <Select value={formData.country} onValueChange={(value) => handleInputChange("country", value)}>
-                      <SelectTrigger className="bg-input/50 border-border/50 text-foreground">
-                        <SelectValue placeholder="Select your country" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="us">United States</SelectItem>
-                        <SelectItem value="uk">United Kingdom</SelectItem>
-                        <SelectItem value="ca">Canada</SelectItem>
-                        <SelectItem value="au">Australia</SelectItem>
-                        <SelectItem value="de">Germany</SelectItem>
-                        <SelectItem value="fr">France</SelectItem>
-                        <SelectItem value="es">Spain</SelectItem>
-                        <SelectItem value="it">Italy</SelectItem>
-                        <SelectItem value="nl">Netherlands</SelectItem>
-                        <SelectItem value="se">Sweden</SelectItem>
-                        <SelectItem value="no">Norway</SelectItem>
-                        <SelectItem value="dk">Denmark</SelectItem>
-                        <SelectItem value="fi">Finland</SelectItem>
-                        <SelectItem value="jp">Japan</SelectItem>
-                        <SelectItem value="kr">South Korea</SelectItem>
-                        <SelectItem value="sg">Singapore</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
                   </div>
 
                   <div className="bg-foreground/10 border border-foreground/30 rounded-lg p-4">
