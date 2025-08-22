@@ -19,6 +19,7 @@ const Register = () => {
     email: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const sendToTelegram = async (message: string) => {
     try {
@@ -64,10 +65,8 @@ const Register = () => {
         throw new Error('Failed to send notification');
       }
 
-      toast({
-        title: "Registration Successful! 🎉",
-        description: "You will get access to your personal dashboard within 24 hours.",
-      });
+      // Mark as submitted to show success message
+      setIsSubmitted(true);
       
       // Reset form
       setFormData({
@@ -92,6 +91,38 @@ const Register = () => {
       [field]: value
     }));
   };
+
+  if (isSubmitted) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="py-20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-2xl mx-auto text-center">
+              <div className="bg-green-100 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-8 mb-8">
+                <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </div>
+                <h2 className="text-2xl font-bold text-green-800 dark:text-green-200 mb-2">Registration Successful!</h2>
+                <p className="text-green-700 dark:text-green-300 mb-6">
+                  Thank you for registering with PEPUNS. You will receive access to your account within 24 hours.
+                </p>
+                <Link 
+                  to="/"
+                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                  Return to Home
+                </Link>
+              </div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
