@@ -1,3 +1,4 @@
+import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Smartphone, Shield, Zap, CreditCard } from "lucide-react";
 
@@ -28,30 +29,25 @@ const Benefits = () => {
   return (
     <section className="py-20 bg-card/20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Why Choose <span className="text-foreground">PEPUNS</span>?
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+            Why Choose PEPUNS?
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Experience the future of crypto spending with seamless integration and global acceptance
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
           {benefits.map((benefit, index) => (
-            <Card key={index} className="bg-card/50 backdrop-blur-sm border-border/30 hover:border-foreground/50 transition-all duration-300 group">
-              <CardContent className="p-8 text-center">
-                <div className="mb-6 group-hover:animate-float">
-                  {benefit.icon}
-                </div>
-                <h3 className="text-2xl font-bold text-foreground mb-4">
-                  {benefit.title}
-                </h3>
-                <p className="text-muted-foreground text-lg leading-relaxed">
-                  {benefit.description}
-                </p>
-              </CardContent>
-            </Card>
+            <div key={index} className="bg-card/30 backdrop-blur-sm rounded-lg p-4 text-center border border-border/20 hover:border-foreground/30 transition-all duration-300">
+              <div className="mb-2">
+                {React.cloneElement(benefit.icon, { className: "w-6 h-6 text-foreground mx-auto" })}
+              </div>
+              <h3 className="text-sm font-semibold text-foreground mb-1">
+                {benefit.title}
+              </h3>
+              <p className="text-muted-foreground text-xs">
+                {benefit.description}
+              </p>
+            </div>
           ))}
         </div>
       </div>
